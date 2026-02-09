@@ -11,25 +11,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.webservice.demo.entities.Category;
 import com.webservice.demo.services.CategoryService;
-import com.webservice.demo.services.OrderService;
 
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryResource {
+
 	@Autowired
 	private CategoryService service;
-	
+
 	@GetMapping
-	public ResponseEntity<List<Category>> findAll(){
-		
+	public ResponseEntity<List<Category>> findAll() {
 		List<Category> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Category> findById(@PathVariable Long id){
+	public ResponseEntity<Category> findById(@PathVariable Long id) {
 		Category obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
 }
