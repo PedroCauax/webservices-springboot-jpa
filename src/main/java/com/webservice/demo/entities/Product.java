@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +30,7 @@ public class Product implements Serializable {
 	private Double price;
 	private String imgUrl;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "tb_produt_category", joinColumns = @JoinColumn(name = "procuct_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();

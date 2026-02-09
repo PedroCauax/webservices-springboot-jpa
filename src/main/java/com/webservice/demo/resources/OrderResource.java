@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webservice.demo.entities.Order;
+import com.webservice.demo.repositories.OrderRepository;
 import com.webservice.demo.services.OrderService;
 
 @RestController
@@ -18,6 +19,10 @@ public class OrderResource {
 	@Autowired
 	private OrderService service;
 	
+	@Autowired
+	private OrderRepository orderRepository;
+	
+	 
 	@GetMapping
 	public ResponseEntity<List<Order>> findAll(){
 		
@@ -25,10 +30,10 @@ public class OrderResource {
 		return ResponseEntity.ok().body(list);
 	}
 
-	@GetMapping(value = "/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Order> findById(@PathVariable Long id){
-		Order obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+	    Order obj = service.findById(id);
+	    return ResponseEntity.ok(obj);
 	}
 	
 }

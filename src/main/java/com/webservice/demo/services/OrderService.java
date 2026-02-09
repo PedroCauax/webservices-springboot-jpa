@@ -12,14 +12,13 @@ import com.webservice.demo.repositories.OrderRepository;
 @Service
 public class OrderService  {
 	@Autowired
-	private OrderRepository repository;
+	private OrderRepository orderRepository;
 	
 	public List<Order> findAll(){
-		return repository.findAll();
+		return orderRepository.findAll();
 	}
 	
 	public Order findById(Long id) {
-		Optional<Order> obj = repository.findById(id);
-		return obj.get();
+	    return orderRepository.findByIdWithItems(id);
 	}
 }
