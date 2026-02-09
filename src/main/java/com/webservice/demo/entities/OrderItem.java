@@ -2,14 +2,11 @@ package com.webservice.demo.entities;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.webservice.demo.entities.pk.OrderItemPK;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
