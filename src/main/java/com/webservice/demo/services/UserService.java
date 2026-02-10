@@ -52,7 +52,7 @@ public class UserService {
 			updateData(entity, obj);
 			return repository.save(entity);
 		} catch (EntityNotFoundException e) {
-			throw new RuntimeException("Id não encontrado");
+			throw new ResourceNotFoundException(id);
 		}
 	}
 
