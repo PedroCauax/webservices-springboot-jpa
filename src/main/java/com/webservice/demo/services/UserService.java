@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.webservice.demo.entities.User;
 import com.webservice.demo.repositories.UserRepository;
+import com.webservice.demo.services.exceptions.DatabaseException;
 import com.webservice.demo.services.exceptions.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -33,7 +35,14 @@ public class UserService {
 	}
 
 	public void delete(Long id) {
-		repository.deleteById(id);
+		try {
+	    if (!repository.existsById(id)) {
+	        throw new ResourceNotFoundException(id);
+	    }
+	    repository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
 	}
 
 	@Transactional
